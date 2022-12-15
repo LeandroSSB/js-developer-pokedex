@@ -1,166 +1,89 @@
-.pokemons {
-    display: grid;
-    grid-template-columns: 1fr;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.normal {
-    background-color: #a6a877;
-}
-
-.grass {
-    background-color: #77c850;
-}
-
-.fire {
-    background-color: #ee7f30;
-}
-
-.water {
-    background-color: #678fee;
-}
-
-.electric {
-    background-color: #f7cf2e;
-}
-
-.ice {
-    background-color: #98d5d7;
-}
-
-.ground {
-    background-color: #dfbf69;
-}
-
-.flying {
-    background-color: #a98ff0;
-}
-
-.poison {
-    background-color: #a040a0;
-}
-
-.fighting {
-    background-color: #bf3029;
-}
-
-.psychic {
-    background-color: #f65687;
-}
-
-.dark {
-    background-color: #725847;
-}
-
-.rock {
-    background-color: #b8a137;
-}
-
-.bug {
-    background-color: #a8b720;
-}
-
-.ghost {
-    background-color: #6e5896;
-}
-
-.steel {
-    background-color: #b9b7cf;
-}
-
-.dragon {
-    background-color: #6f38f6;
-}
-
-.fairy {
-    background-color: #f9aec7;
-}
-
 .pokemon {
-    display: flex;
-    flex-direction: column;
-    margin: .5rem;
-    padding: 1rem;
-    border-radius: 1rem;
+  height: 100vh;
+  display: flex;
+  flex-flow: column;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: flex-start;
+  text-transform: capitalize;
 }
 
-.pokemon .number {
-    color: #000;
-    opacity: .3;
-    text-align: right;
-    font-size: .625rem;
+
+.pokemon__mainDetails {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
 }
 
-.pokemon .name {
-    text-transform: capitalize;
-    color: #fff;
-    margin-bottom: .25rem;
+.pokemon__mainDetails h1 {
+  color: rgb(255, 255, 255);
 }
 
-.pokemon .detail {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+
+.pokemon__mainDetails img{
+  z-index: 1;
+  width: 210px;
+  height: 230px;
 }
 
-.pokemon .detail .types {
-    padding: 0;
-    margin: 0;
-    list-style: none;
+.pokemon__mainDetails__type{
+  filter: brightness(1.1);
+  padding: .3rem 1.3rem;
+  margin: .25rem 0rem 0rem .7rem;
+  font-size: .9rem;
+  border-radius: 1rem;
+  filter: brightness(1.1);
+  text-align: center;
+  color: rgba(255, 255, 255, 0.678);
+
+}
+.pokemon__mainDetails__types {
+  display: flex;
+  width: 100vw;
+  justify-content: flex-start;
+}
+.pokemon__mainDetails__number {
+  width: 100vw;
+  text-align: end;
+  margin-top: 7vh;
+  position: fixed;
+  margin-right: 10vw;
+  color: rgba(255, 255, 255, 0.678);
 }
 
-.pokemon .detail .types .type {
-    color: #fff;
-    padding: .25rem .5rem;
-    margin: .25rem 0;
-    font-size: .625rem;
-    border-radius: 1rem;
-    filter: brightness(1.1);
-    text-align: center;
+.pokemon__pokemonDetail__pokemonStats {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 10rem;
+  margin-top: 5px;
+  margin-left: .5rem;
+  color: rgba(0, 0, 0, 0.808);
 }
 
-.pokemon .detail img {
-    max-width: 100%;
-    height: 70px;
+.pokemon__pokemonDetail__pokemonStats strong, .pokemon__pokemonDetail__pokemonAbilities strong  {
+  color: gray;
 }
 
-.pagination {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding: 1rem;
+.pokemon__pokemonDetail__pokemonAbilities {
+  display: flex;
+  margin-top: 5px;
+  justify-content: space-between;
+  margin-left: .5rem;
+  color: rgba(0, 0, 0, 0.808);
 }
 
-.pagination button {
-    padding: .25rem .5rem;
-    margin: .25rem 0;
-    font-size: .625rem;
-    color: #fff;
-    background-color: #6c79db;
-    border: none;
-    border-radius: 1rem;
-    cursor: pointer;
+.pokemon__detail {
+  background-color: white;
+  border-radius: 2.2rem 2.2rem 0rem 0rem;
+  position: fixed;
+  width: 100vw;
+  height: 60vh;
+  bottom: 0;
+  padding: 15px;
 }
 
-@media screen and (min-width: 380px) {
-    .pokemons {
-        grid-template-columns: 1fr 1fr;
-    }
-}
-
-@media screen and (min-width: 576px) {
-    .pokemons {
-        grid-template-columns: 1fr 1fr 1fr;
-    }
-}
-
-@media screen and (min-width: 992px) {
-    .pokemons {
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-    }
+.pokemon__detail h1 {
+  text-align: center;
 }

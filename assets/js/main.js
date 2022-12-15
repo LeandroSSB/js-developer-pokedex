@@ -1,50 +1,43 @@
 import { pokeApi } from "./poke-api.js"
+import Pokemon from "./pokemon-model.js"
+import * as utils from "./../utils/index.js"
 
-const loadMoreButton = document.getElementById('loadMoreButton')
-const pokemonList = document.getElementById('pokemonList')
-
-const maxRecords = 151
-const limit = 10
-let offset = 0;
-
-function convertPokemonToLi(pokemon) {
+const pokemonMain = document.getElementById('pokemon')
+function convertPokemonToLi(pokemon = new Pokemon()) {
+  const pokemonStyle = (type) =>  utils.colors[Object.keys(utils.colors).find(color => color==type)]['background-color']
 
     return `
-        <li class="pokemon ${pokemon.type}">
-            <span class="number">#${pokemon.number}</span>
-            <span class="name">${pokemon.name}</span>
+    <section class="pokemon__mainDetails" style="background-color:${pokemonStyle(pokemon.type)}"> 
+      <h1> ${pokemon.name} </h1>
 
-            <div class="detail">
-                <ol class="types">
-                    ${pokemon.types.map((type) => `<li class="type ${type}">${type}</li>`).join('')}
-                </ol>
+      <span class="pokemon__mainDetails__number"> #${pokemon.number} </span>
 
-                <img src="${pokemon.photo}"
-                     alt="${pokemon.name}">
-            </div>
-        </li>
+      <div class="pokemon__mainDetails__types">
+        ${pokemon.types.map(type => `<span class="pokemon__mainDetails__type" style="background-color:${pokemonStyle(type)}"> ${type} </span>`).join("")}
+      </div>
+
+      <img src="${pokemon.photo}" alt="${pokemon.name}">
+
+    </section>
+
+    <section class="pokemon__detail">
+      <h1> About </h1>
+      ${pokemon.stats.map(stat => `<div class="pokemon__pokemonDetail__pokemonStats"> <strong> ${stat.name} </strong> ${stat.base_stat} </div>`).join('')}
+      <div class="pokemon__pokemonDetail__pokemonAbilities"> <strong> Abilities </strong>  ${pokemon.abilities.map(ability => ability).join(", ")} </div>
+    </section>
+
+
+
     `
 }
 
-const loadPokemonItens = (offset, limit) => {
-    pokeApi.getPokemons(offset, limit).then((pokemons = []) => {
-        const newHtml = pokemons.map(convertPokemonToLi).join('')
-        pokemonList.innerHTML += newHtml
-    })
+const loadPokemonItens = async (offset, limit) => {
+    await pokeApi.getPokemons(offset, limit).then((pokemons = []) => {
+        const newHtml = convertPokemonToLi(pokemons[0])
+        pokemonMain.innerHTML = newHtml
+      })
+      
+     
 }
 
-loadPokemonItens(offset, limit)
-
-loadMoreButton.addEventListener('click', () => {
-    offset += limit
-    const qtdRecordsWithNexPage = offset + limit
-
-    if (qtdRecordsWithNexPage >= maxRecords) {
-        const newLimit = maxRecords - offset
-        loadPokemonItens(offset, newLimit)
-
-        loadMoreButton.parentElement.removeChild(loadMoreButton)
-    } else {
-        loadPokemonItens(offset, limit)
-    }
-})
+loadPokemonItens()
