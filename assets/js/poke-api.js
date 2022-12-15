@@ -31,7 +31,12 @@ export const convertPokeApiDetailToPokemon = (pokeDetail) => {
       number: pokeDetail.id,
       photo: pokeDetail.sprites.other.dream_world.front_default,
       type: type,
-      types: types
+      types: types,
+      abilities: abilities,
+      base_experience: pokeDetail.base_experience,
+      height: pokeDetail.height,
+      weight: pokeDetail.weight,
+      stats: stats
     })
   
     return pokemon
