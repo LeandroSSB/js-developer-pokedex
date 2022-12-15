@@ -7,9 +7,11 @@ export const pokeApi = {
       return convertPokeApiDetailToPokemon(pokeDetail)
   },
   
-  async getPokemons(offset = 0, limit = 5) {
-      const url = `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`
-  
+  async getPokemons() {
+    const random = Math.floor(Math.random() * 152)
+      const url = `https://pokeapi.co/api/v2/pokemon?offset=${random}`
+
+
       return await fetch(url)
           .then((response) => response.json())
           .then((jsonBody) => jsonBody.results)
@@ -23,7 +25,7 @@ export const pokeApi = {
 export const convertPokeApiDetailToPokemon = (pokeDetail) => {
   const types = pokeDetail.types.map((typeSlot) => typeSlot.type.name)
   const [type] = types
-
+    console.log(pokeDetail)
     const pokemon = new Pokemon({
       name: pokeDetail.name,
       number: pokeDetail.id,
@@ -32,7 +34,6 @@ export const convertPokeApiDetailToPokemon = (pokeDetail) => {
       types: types
     })
   
-
     return pokemon
 }
 
