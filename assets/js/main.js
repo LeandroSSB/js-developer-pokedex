@@ -1,18 +1,22 @@
 import { pokeApi } from "./poke-api.js"
 import Pokemon from "./pokemon-model.js"
+import * as utils from "./../utils/index.js"
 
 const pokemonMain = document.getElementById('pokemon')
 function convertPokemonToLi(pokemon = new Pokemon()) {
-  
+  const pokemonStyle = (type) =>  utils.colors[Object.keys(utils.colors).find(color => color==type)]['background-color']
+
     return `
-    <section class="pokemon__mainDetails"> 
+    <section class="pokemon__mainDetails" style="background-color:${pokemonStyle(pokemon.type)}"> 
       <h1> ${pokemon.name} </h1>
 
-      <span> #${pokemon.number} </span>
+      <span class="pokemon__mainDetails__number"> #${pokemon.number} </span>
 
-      ${pokemon.types.map(type => `<span class="pokemon__mainDetails__types"> ${type} </span>`).join("")}
+      <div class="pokemon__mainDetails__types">
+        ${pokemon.types.map(type => `<span class="pokemon__mainDetails__type" style="background-color:${pokemonStyle(type)}"> ${type} </span>`).join("")}
+      </div>
 
-      <img src="${pokemon.photo}" alt="${pokemon.name}" width="250px">
+      <img src="${pokemon.photo}" alt="${pokemon.name}">
 
     </section>
 
@@ -27,11 +31,13 @@ function convertPokemonToLi(pokemon = new Pokemon()) {
     `
 }
 
-const loadPokemonItens = (offset, limit) => {
-    pokeApi.getPokemons(offset, limit).then( (pokemons = []) => {
+const loadPokemonItens = async (offset, limit) => {
+    await pokeApi.getPokemons(offset, limit).then((pokemons = []) => {
         const newHtml = convertPokemonToLi(pokemons[0])
         pokemonMain.innerHTML = newHtml
-    })
+      })
+      
+     
 }
 
 loadPokemonItens()
