@@ -18,7 +18,7 @@ function convertPokemonToLi(pokemon = new Pokemon()) {
     </section>
 
     <section>
-      <div> ${pokemon} </div>
+      <div> ${pokemon.abilities.map(ability => console.log(ability))} </div>
     </section>
 
 

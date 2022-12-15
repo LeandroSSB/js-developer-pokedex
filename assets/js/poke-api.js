@@ -25,7 +25,8 @@ export const pokeApi = {
 export const convertPokeApiDetailToPokemon = (pokeDetail) => {
   const types = pokeDetail.types.map((typeSlot) => typeSlot.type.name)
   const [type] = types
-    console.log(pokeDetail)
+
+  
     const pokemon = new Pokemon({
       name: pokeDetail.name,
       number: pokeDetail.id,
